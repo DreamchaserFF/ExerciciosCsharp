@@ -1,0 +1,84 @@
+#include <stdio.h>
+
+double adicao(double num1, double num2) {
+    return num1 + num2;
+}
+
+double subtracao(double num1, double num2) {
+    return num1 - num2;
+}
+
+double multiplicacao(double num1, double num2) {
+    return num1 * num2;
+}
+
+double divisao(double num1, double num2) {
+    if (num2 != 0)
+        return num1 / num2;
+    else {
+        printf("Erro! Divisão por zero.\n");
+        return 0;
+    }
+}
+
+double potencia(double num1, double num2) {
+    double resultado = 1.0;
+    for (int i = 0; i < num2; i++) {
+        resultado *= num1;
+    }
+    return resultado;
+}
+
+double porcent(double num1, double num2) {
+    return (num1 / 100) * num2;
+}
+
+int main() {
+    char operador;
+    double numero, resultado = 0;
+    int entrada = 1;
+
+    printf("Digite os números e operadores (finalize com '='):\n");
+
+    while (1) {
+        scanf(" %lf", &numero);
+
+        if (entrada) {
+            resultado = numero;
+            entrada = 0;
+        } else {
+            switch (operador) {
+                case '+':
+                    resultado = adicao(resultado, numero);
+                    break;
+                case '-':
+                    resultado = subtracao(resultado, numero);
+                    break;
+                case '*':
+                    resultado = multiplicacao(resultado, numero);
+                    break;
+                case '/':
+                    resultado = divisao(resultado, numero);
+                    break;
+                case '%':
+                    resultado = porcent(resultado, numero);
+                    break;
+                case '^':
+                    resultado = potencia(resultado, numero);
+                    break;
+                default:
+                    printf("Operador inválido. Favor, tente novamente.\n");
+                    return 1;
+            }
+        }
+
+        scanf(" %c", &operador);
+
+        if (operador == '=') {
+            printf("Resultado: %.2lf\n", resultado);
+            break;
+        }
+    }
+
+    return 0;
+}
